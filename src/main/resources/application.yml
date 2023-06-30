@@ -33,6 +33,7 @@ spring:
               args:
                 name: orderCircuitBreaker
       default-filters:
+        - name: SaveSession
         - name: RequestRateLimiter
           args:
             redis-rate-limiter:
@@ -56,6 +57,10 @@ spring:
       port: 6379
       connect-timeout: 2s
       timeout: 1s
+  session:
+    redis:
+      namespace: polar:edge
+    timeout: 10m
 resilience4j:
   circuitbreaker:
     configs:
