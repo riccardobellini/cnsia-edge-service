@@ -33,6 +33,12 @@ spring:
               args:
                 name: orderCircuitBreaker
       default-filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenishRate: 10
+              burstCapacity: 20
+              requestedTokens: 1
         - name: Retry
           args:
             retries: 3
@@ -40,10 +46,16 @@ spring:
             series: SERVER_ERROR
             exceptions: java.io.IOException,java.util.concurrent.TimeoutException
             backoff:
-              firstBackoff: 500ms
-              maxBackoff: 1000ms
+              firstBackoff: 100ms
+              maxBackoff: 500ms
               factor: 2
               basedOnPreviousValue: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      connect-timeout: 2s
+      timeout: 1s
 resilience4j:
   circuitbreaker:
     configs:
@@ -57,5 +69,3 @@ resilience4j:
       default:
         timeout-duration:
           5s
-logging.level:
-  io.github.resilience4j: DEBUG
