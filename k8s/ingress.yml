@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: polar-ingress
+  namespace: polar
+spec:
+  ingressClassName: public
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: edge-service
+                port:
+                  number: 80
+            pathType: Prefix
