@@ -10,6 +10,18 @@ spring:
   lifecycle:
     timeout-per-shutdown-phase: 15s
   config.import: "optional:configserver:"
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: edge-service
+            client-secret: polar-keycloak-secret
+            scope:
+              - openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9090/realms/PolarBookshop
   cloud:
     config:
       uri: http://localhost:8888
