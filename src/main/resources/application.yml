@@ -19,6 +19,7 @@ spring:
             client-secret: polar-keycloak-secret
             scope:
               - openid
+              - roles
         provider:
           keycloak:
             issuer-uri: http://localhost:9090/realms/PolarBookshop
@@ -53,6 +54,7 @@ spring:
             - Path=/,/*.css,/*.js,/favicon.ico
       default-filters:
         - name: SaveSession
+        - name: TokenRelay
         - name: RequestRateLimiter
           args:
             redis-rate-limiter:
