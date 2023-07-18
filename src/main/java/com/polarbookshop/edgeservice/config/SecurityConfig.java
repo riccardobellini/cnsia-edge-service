@@ -29,6 +29,8 @@ public class SecurityConfig {
                         .permitAll()
                         .pathMatchers("/books/**")
                         .permitAll()
+                        .pathMatchers("/actuator/**")
+                        .permitAll()
                         .anyExchange().authenticated())
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED)))

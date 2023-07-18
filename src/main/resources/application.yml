@@ -95,3 +95,14 @@ resilience4j:
       default:
         timeout-duration:
           5s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,loggers
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
